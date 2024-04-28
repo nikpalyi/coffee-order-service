@@ -13,13 +13,10 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    // Constructor with @Autowired (if using constructor injection)
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
-
-    // @GetMapping, @PostMapping, @PutMapping, @DeleteMapping methods...
     @GetMapping("/{id}")
     public ResponseEntity<Order> findOrderById(@PathVariable Long id) {
         Order order = orderService.findOrderById(id);
@@ -40,24 +37,30 @@ public class OrderController {
         return orderService.findAllOrders();
     }
 
-    @PutMapping
-    public Order updateOrder(@RequestBody Order order) {
-        return orderService.updateOrder(order);
+    @PutMapping("/{id}")
+    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
+        Order updatedOrder = orderService.updateOrder(order);
+        if (updatedOrder != null) {
+            return ResponseEntity.ok(updatedOrder);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
-    public void deleteAllOrders() {
+    public ResponseEntity<Void> deleteAllOrders() {
         orderService.deleteAllOrders();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/date/{startDate}/{endDate}")
     public List<Order> findOrdersByOrderDateBetween(@PathVariable LocalDateTime startDate, @PathVariable LocalDateTime endDate) {
         return orderService.findOrdersByOrderDateBetween(startDate, endDate);
     }
-
 }
