@@ -32,6 +32,17 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def mvnHome = tool 'Maven3'
+                    withSonarQubeEnv('SonarQube') {
+                        sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=coffee-order-microservice -Dsonar.projectName='coffee-order-microservice'"
+                    }
+                }
+            }
+        }
+
         stage('Maven Build') {
             steps {
                 // Run Maven commands within the 'withMaven' block
