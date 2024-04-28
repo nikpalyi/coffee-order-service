@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        // Specify the Maven tool by name
-        maven 'Maven'
+        // Specify the Maven tool by its installation name
+        maven 'Maven3'
     }
 
     stages {
@@ -35,7 +35,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 // Run Maven commands within the 'withMaven' block
-                withMaven(maven: 'Maven') {
+                withMaven(maven: 'Maven3') {
                     sh 'mvn clean verify'
                 }
             }
