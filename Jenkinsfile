@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        // Specify the path to the Maven installation directory
-        MVN_HOME = tool name: 'Maven3', type: 'maven'
-        PATH = "$MVN_HOME/bin:$PATH"
+    tools {
+        // Specify the Maven tool by name
+        maven 'Maven3'
     }
 
     stages {
