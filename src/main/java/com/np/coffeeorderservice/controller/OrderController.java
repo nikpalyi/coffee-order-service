@@ -2,6 +2,7 @@ package com.np.coffeeorderservice.controller;
 
 import com.np.coffeeorderservice.model.Order;
 import com.np.coffeeorderservice.service.OrderService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,8 +21,13 @@ public class OrderController {
 
     // @GetMapping, @PostMapping, @PutMapping, @DeleteMapping methods...
     @GetMapping("/{id}")
-    public Order findOrderById(@PathVariable Long id) {
-        return orderService.findOrderById(id);
+    public ResponseEntity<Order> findOrderById(@PathVariable Long id) {
+        Order order = orderService.findOrderById(id);
+        if (order != null) {
+            return ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

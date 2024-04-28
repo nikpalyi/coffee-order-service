@@ -20,3 +20,9 @@ $src/main/resources/schema-orders.sql,2/7/2782eb3c8d44d573fcd09eb958245e31798d4
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+l
+<src/test/java/com/np/coffeeorderservice/model/OrderTest.java,4/b/4be1db48932562ccc8d70e327f8a9b62cfedaa7f
+{
+Ksrc/test/java/com/np/coffeeorderservice/controller/OrderControllerTest.java,9/5/95a390ec2e57ab66a01ab5774a60b18040c5a527
+{
+Ksrc/test/java/com/np/coffeeorderservice/repository/OrderRepositoryTest.java,5/3/53bf8ab41a15a5cc6d843db71f0315113a94fc77
