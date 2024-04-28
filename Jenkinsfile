@@ -35,7 +35,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 // Run Maven commands within the 'withMaven' block
-                withMaven(maven: 'Maven3') {
+                withMaven(maven: 'Maven3', configFileProvider([configFile(fileId: 'your-maven-settings-id', targetLocation: 'settings.xml')])) {
                     sh 'mvn clean verify'
                 }
             }
