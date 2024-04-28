@@ -31,5 +31,14 @@ pipeline {
                 sh 'mvn package'
             }
         }
+
+        stage('Maven Build') {
+            steps {
+                // Run Maven commands within the 'withMaven' block
+                withMaven(maven: 'Maven') {
+                    sh 'mvn clean verify'
+                }
+            }
+        }
     }
 }
