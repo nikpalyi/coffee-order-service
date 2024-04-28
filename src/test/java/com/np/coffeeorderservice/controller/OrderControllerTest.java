@@ -12,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class OrderControllerTest {
@@ -89,6 +91,66 @@ class OrderControllerTest {
         assertEquals(expectedOrders.size(), actualOrders.size());
         assertEquals(expectedOrders.get(0), actualOrders.get(0));
         assertEquals(expectedOrders.get(1), actualOrders.get(1));
+    }
+
+    @Test
+    void findOrderByIdReturnsOrderWhenFound() {
+        Order order = new Order();
+        when(orderService.findOrderById(1L)).thenReturn(order);
+
+        ResponseEntity<Order> result = orderController.findOrderById(1L);
+
+        assertEquals(order, result.getBody());
+        assertEquals(200, result.getStatusCodeValue());
+    }
+
+    @Test
+    void findOrderByIdReturnsNotFoundWhenNotFound() {
+        when(orderService.findOrderById(1L)).thenReturn(null);
+
+        ResponseEntity<Order> result = orderController.findOrderById(1L);
+
+        assertNull(result.getBody());
+        assertEquals(404, result.getStatusCodeValue());
+    }
+
+    @Test
+    void updateOrderReturnsUpdatedOrder() {
+        Order order = new Order();
+        when(orderService.updateOrder(order)).thenReturn(order);
+
+        Order result = orderController.updateOrder(order);
+
+        assertEquals(order, result);
+    }
+
+    @Test
+    void deleteOrderCallsService() {
+        orderController.deleteOrder(1L);
+
+        verify(orderService, times(1)).deleteOrder(1L);
+    }
+
+    @Test
+    void deleteAllOrdersCallsService() {
+        orderController.deleteAllOrders();
+
+        verify(orderService, times(1)).deleteAllOrders();
+    }
+
+    @Test
+    void findOrdersByOrderDateBetweenReturnsOrders() {
+        LocalDateTime startDate = LocalDateTime.now().minusDays(1);
+        LocalDateTime endDate = LocalDateTime.now();
+        Order order1 = new Order();
+        Order order2 = new Order();
+        when(orderService.findOrdersByOrderDateBetween(startDate, endDate)).thenReturn(Arrays.asList(order1, order2));
+
+        List<Order> result = orderController.findOrdersByOrderDateBetween(startDate, endDate);
+
+        assertEquals(2, result.size());
+        assertTrue(result.contains(order1));
+        assertTrue(result.contains(order2));
     }
 
 }

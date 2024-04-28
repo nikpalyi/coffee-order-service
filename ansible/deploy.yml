@@ -1,0 +1,24 @@
+# This playbook is used to deploy the application on the target servers
+---
+- hosts: my_application_servers
+  become: yes
+  tasks:
+    - name: Pull Docker image
+      docker_image:
+        name: coffee-order-microservice
+        source: pull
+        state: present
+
+    - name: Stop and remove existing container
+      docker_container:
+        name: coffee-order-microservice
+        state: absent
+
+    - name: Run Docker container
+      docker_container:
+        name: coffee-order-microservice
+        image: coffee-order-microservice
+        state: started
+        ports:
+          - "8082:8082"
+        restart_policy: always

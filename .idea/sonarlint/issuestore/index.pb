@@ -26,3 +26,14 @@ l
 Ksrc/test/java/com/np/coffeeorderservice/controller/OrderControllerTest.java,9/5/95a390ec2e57ab66a01ab5774a60b18040c5a527
 {
 Ksrc/test/java/com/np/coffeeorderservice/repository/OrderRepositoryTest.java,5/3/53bf8ab41a15a5cc6d843db71f0315113a94fc77
+~
+Nsrc/test/java/com/np/coffeeorderservice/CoffeeOrderServiceIntegrationTest.java,e/8/e8f9b0cb8beb951a1edd4ae1a5d2ae0ea0075fcd
+u
+Esrc/test/java/com/np/coffeeorderservice/service/OrderServiceTest.java,1/e/1e4e7dd0ce2323f86fc78e4652751ac4e1ead630
+
+Osrc/test/java/com/np/coffeeorderservice/CoffeeOrderServiceApplicationTests.java,4/5/451a7c90ad6a887e478de1eb3155e36991246c83
+:
+
+Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4
+B
+ansible/deploy.yml,6/4/642315289ba18e1058d8c383061d03f43b94653a
