@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        // Define the Maven home directory
-        MAVEN_HOME = tool 'Maven'
-        PATH = "$PATH:$MAVEN_HOME/bin"
+    tools {
+        // Specify the Maven tool by name
+        maven 'Maven'
     }
 
     stages {
