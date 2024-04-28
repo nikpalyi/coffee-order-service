@@ -1,24 +1,28 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                // Checkout code from Git
-                git 'https://github.com/your-username/coffee-order-microservice.git'
-                // Build Maven project
-                sh 'mvn clean install'
+                git 'https://github.com/nikpalyi/coffee-order-service.git'
             }
         }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
         stage('Test') {
             steps {
-                // Run tests
                 sh 'mvn test'
             }
         }
-        stage('Deploy') {
+
+        stage('Package') {
             steps {
-                // Deploy to server
-                // Add deployment steps here
+                sh 'mvn package'
             }
         }
     }
