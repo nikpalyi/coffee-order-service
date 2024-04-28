@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        // Define the Maven home directory
+        MAVEN_HOME = tool 'Maven'
+        PATH = "$PATH:$MAVEN_HOME/bin"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,6 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                // Use 'mvn' command directly since Maven should be available in the PATH
                 sh 'mvn clean compile'
             }
         }
